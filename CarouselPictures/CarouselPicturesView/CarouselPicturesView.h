@@ -13,6 +13,8 @@ typedef NS_ENUM(NSUInteger, PageControlStyle) {
     PageControlAtRight,
 };
 
+typedef void(^imageViewDidTapAtIndex)(NSInteger index);
+
 @interface CarouselPicturesView : UIView
 
 ///占位图片
@@ -26,7 +28,7 @@ typedef NS_ENUM(NSUInteger, PageControlStyle) {
 @property (nonatomic,copy) NSArray<NSString *> *titleData; ///设置后显示label,自动设置PageControlAtRight
 
 ///图片被点击会调用该block
-@property (nonatomic,copy) void(^imageViewDidTapAtIndex)(NSInteger index); ///index从0开始
+@property (nonatomic,copy) imageViewDidTapAtIndex imageViewDidTapAtIndex; ///index从0开始
 
 /*@parameter imageUrl
  imageUrlString或imageName

@@ -122,6 +122,13 @@
     _PageControl = page;
 }
 
+- (void)setContentMode:(UIViewContentMode)contentMode
+{
+    _leftImageView.contentMode = contentMode;
+    _centerImageView.contentMode = contentMode;
+    _rightImageView.contentMode = contentMode;
+}
+
 - (void)setStyle:(PageControlStyle)style {
     if (style == PageControlAtRight) {
         CGFloat w = _MaxImageCount * 17.5;
