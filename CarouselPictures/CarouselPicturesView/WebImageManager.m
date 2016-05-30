@@ -6,9 +6,9 @@
 //  Copyright © 2016年 shitaotao. All rights reserved.
 //
 
-#import "DCWebImageManager.h"
+#import "WebImageManager.h"
 
-@interface DCWebImageManager ()
+@interface WebImageManager ()
 
 @property (nonatomic,copy) NSString *cachePath;
 
@@ -16,13 +16,13 @@
 
 @end
 
-@implementation DCWebImageManager
+@implementation WebImageManager
 
 + (instancetype)shareManager {
-    static DCWebImageManager *instance;
+    static WebImageManager *instance;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        instance = [[DCWebImageManager alloc] init];
+        instance = [[WebImageManager alloc] init];
     });
     
     return  instance;

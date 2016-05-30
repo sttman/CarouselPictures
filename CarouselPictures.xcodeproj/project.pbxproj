@@ -16,7 +16,7 @@
 		8D1C81EF1C51D99100598CBC /* CarouselPicturesTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D1C81EE1C51D99100598CBC /* CarouselPicturesTests.m */; };
 		8D1C81FA1C51D99100598CBC /* CarouselPicturesUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D1C81F91C51D99100598CBC /* CarouselPicturesUITests.m */; };
 		8DA842211C53118800D12771 /* CarouselPicturesView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DA8421E1C53118800D12771 /* CarouselPicturesView.m */; };
-		8DA842221C53118800D12771 /* DCWebImageManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DA842201C53118800D12771 /* DCWebImageManager.m */; };
+		8DA842221C53118800D12771 /* WebImageManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DA842201C53118800D12771 /* WebImageManager.m */; };
 		8DA8422A1C5311C800D12771 /* 1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 8DA842231C5311C800D12771 /* 1.jpg */; };
 		8DA8422B1C5311C800D12771 /* 2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 8DA842241C5311C800D12771 /* 2.jpg */; };
 		8DA8422C1C5311C800D12771 /* 3.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 8DA842251C5311C800D12771 /* 3.jpg */; };
@@ -62,8 +62,8 @@
 		8D1C81FB1C51D99100598CBC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8DA8421D1C53118800D12771 /* CarouselPicturesView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CarouselPicturesView.h; sourceTree = "<group>"; };
 		8DA8421E1C53118800D12771 /* CarouselPicturesView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CarouselPicturesView.m; sourceTree = "<group>"; };
-		8DA8421F1C53118800D12771 /* DCWebImageManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCWebImageManager.h; sourceTree = "<group>"; };
-		8DA842201C53118800D12771 /* DCWebImageManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCWebImageManager.m; sourceTree = "<group>"; };
+		8DA8421F1C53118800D12771 /* WebImageManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebImageManager.h; sourceTree = "<group>"; };
+		8DA842201C53118800D12771 /* WebImageManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebImageManager.m; sourceTree = "<group>"; };
 		8DA842231C5311C800D12771 /* 1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 1.jpg; sourceTree = "<group>"; };
 		8DA842241C5311C800D12771 /* 2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 2.jpg; sourceTree = "<group>"; };
 		8DA842251C5311C800D12771 /* 3.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 3.jpg; sourceTree = "<group>"; };
@@ -173,8 +173,8 @@
 			children = (
 				8DA8421D1C53118800D12771 /* CarouselPicturesView.h */,
 				8DA8421E1C53118800D12771 /* CarouselPicturesView.m */,
-				8DA8421F1C53118800D12771 /* DCWebImageManager.h */,
-				8DA842201C53118800D12771 /* DCWebImageManager.m */,
+				8DA8421F1C53118800D12771 /* WebImageManager.h */,
+				8DA842201C53118800D12771 /* WebImageManager.m */,
 			);
 			path = CarouselPicturesView;
 			sourceTree = "<group>";
@@ -319,7 +319,7 @@
 				8D1C81DC1C51D99100598CBC /* ViewController.m in Sources */,
 				8DA842211C53118800D12771 /* CarouselPicturesView.m in Sources */,
 				8D1C81D91C51D99100598CBC /* AppDelegate.m in Sources */,
-				8DA842221C53118800D12771 /* DCWebImageManager.m in Sources */,
+				8DA842221C53118800D12771 /* WebImageManager.m in Sources */,
 				8D1C81D61C51D99100598CBC /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

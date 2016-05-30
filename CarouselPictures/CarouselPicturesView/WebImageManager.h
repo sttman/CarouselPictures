@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface DCWebImageManager : NSObject
+@interface WebImageManager : NSObject
 
 //只需要设置这2个就行了
 

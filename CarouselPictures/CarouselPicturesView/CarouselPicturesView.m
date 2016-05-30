@@ -12,7 +12,7 @@
 #define pageSize (myHeight * 0.2 > 25 ? 25 : myHeight * 0.2)
 
 #import "CarouselPicturesView.h"
-#import "DCWebImageManager.h"
+#import "WebImageManager.h"
 
 @interface CarouselPicturesView ()<UIScrollViewDelegate>
 
@@ -295,7 +295,7 @@
 
 - (UIImage *)setImageWithIndex:(NSInteger)index {
     //从内存缓存中取,如果没有使用占位图片
-    UIImage *image = [[[DCWebImageManager shareManager] webImageCache] valueForKey:_imageData[index]];
+    UIImage *image = [[[WebImageManager shareManager] webImageCache] valueForKey:_imageData[index]];
     
     return image ? image : _placeImage;
 }
@@ -347,7 +347,7 @@
 
 - (void)getImage {
     for (NSString *urlSting in _imageData) {
-        [[DCWebImageManager shareManager] downloadImageWithUrlString:urlSting];
+        [[WebImageManager shareManager] downloadImageWithUrlString:urlSting];
     }
     
 }
