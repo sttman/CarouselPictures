@@ -301,7 +301,9 @@
 }
 
 - (void)scorll {
-    [_scrollView setContentOffset:CGPointMake(_scrollView.contentOffset.x + myWidth, 0) animated:YES];
+    if (_scrollView) {
+        [_scrollView setContentOffset:CGPointMake(_scrollView.contentOffset.x + myWidth, 0) animated:YES];
+    }
 }
 
 - (void)setAutoScrollDelay:(NSTimeInterval)AutoScrollDelay {
