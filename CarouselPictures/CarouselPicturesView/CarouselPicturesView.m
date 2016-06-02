@@ -48,7 +48,7 @@
     [self prepareImageView];
     [self preparePageControl];
     
-    [self setUpTimer];
+//    [self setUpTimer];
     
     [self changeImageLeft:_MaxImageCount-1 center:0 right:1];
 }

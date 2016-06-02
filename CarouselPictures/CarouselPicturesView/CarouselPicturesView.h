@@ -37,7 +37,11 @@ typedef void(^imageViewDidTapAtIndex)(NSInteger index);
  */
 + (instancetype)carouselPicturesViewWithFrame:(CGRect)frame WithImageUrls:(NSArray<NSString *> *)imageUrl;
 
+/// 开始滚动
+- (void)setUpTimer;
 
+/// 结束滚动
+- (void)removeTimer;
 
 @property (nonatomic,strong) UIColor *pageIndicatorTintColor;
 
