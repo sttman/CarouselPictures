@@ -93,6 +93,7 @@
     [super setFrame:frame];
     
     [self prepareScrollView];
+    self.count = 2; // 在没设置图片的时候设置大小进行显示。
 }
 
 - (void)prepareScrollView {
@@ -131,6 +132,13 @@
 }
 
 - (void)preparePageControl {
+    // 如果有pageControl先删
+    for (UIView *childsView in self.subviews) {
+        if ([childsView isKindOfClass:[UIPageControl class]]) {
+            [childsView removeFromSuperview];
+        }
+    }
+    
     UIPageControl *page = [[UIPageControl alloc] initWithFrame:CGRectMake(0,myHeight - pageSize,myWidth, 7)];
     
     page.pageIndicatorTintColor = [UIColor lightGrayColor];
@@ -351,7 +359,7 @@
 
 - (void)setImageData:(NSArray *)ImageNames {
     _isNetwork = [ImageNames.firstObject hasPrefix:@"http://"];
-    
+    self.count = ImageNames.count;
     if (_isNetwork) {
         
         _imageData = [ImageNames copy];
@@ -377,7 +385,23 @@
     }
     [WebImageManager shareManager].downLoadImageSuccess = ^{ // 下载完了马上设置图片
         dispatch_async(dispatch_get_main_queue(), ^{
-            [self changeImageLeft:_MaxImageCount-1 center:0 right:1];
+            // 在什么位置添加什么图片
+            if (_currentIndex == _MaxImageCount-1) {
+                
+                [self changeImageLeft:_currentIndex-1 center:_currentIndex right:0];
+                
+            }else if (_currentIndex == _MaxImageCount) {
+                
+                [self changeImageLeft:_MaxImageCount-1 center:0 right:1];
+                
+            }else if (_currentIndex == 0) {
+                
+                [self changeImageLeft:_MaxImageCount-1 center:0 right:1];
+                
+            } else {
+                
+                [self changeImageLeft:_currentIndex-1 center:_currentIndex right:_currentIndex+1];
+            }
         });
     };
     if (_imageData.count) { // 防止第一次调用的时候有缓存不显示
