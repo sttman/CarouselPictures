@@ -100,12 +100,17 @@
     //                内存缓存
     [self.webImageData setObject:image forKey:urlString];
     //                沙盒缓存
-    [data writeToFile:[self.cachePath stringByAppendingPathComponent:urlString.lastPathComponent] atomically:YES];
+    BOOL ret = [data writeToFile:[self.cachePath stringByAppendingPathComponent:urlString.lastPathComponent] atomically:YES];
+    if (ret) {
+        if (self.downLoadImageSuccess) {
+            self.downLoadImageSuccess();
+        }
+    }
 }
 
 - (void)repeatDownLoadImage:(NSString *)urlString error:(NSError *)error{
     NSNumber *num = [self.DownloadImageCount objectForKey:urlString];
-    NSInteger count = num ? [num integerValue] : 0;
+    NSInteger count = num?[num integerValue]:0;
     
     if (self.DownloadImageRepeatCount > count ) {
         

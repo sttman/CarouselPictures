@@ -14,13 +14,7 @@
 #import "CarouselPicturesView.h"
 #import "WebImageManager.h"
 
-@interface CarouselPicturesView ()<UIScrollViewDelegate>
-
-@property (nonatomic,copy) NSArray *imageData;
-
-@end
-
-@implementation CarouselPicturesView{
+@interface CarouselPicturesView ()<UIScrollViewDelegate>{
     /// UI
     __weak  UIImageView *_leftImageView,*_centerImageView,*_rightImageView;
     
@@ -41,7 +35,10 @@
     
     BOOL _hasTitle;
 }
+@end
 
+@implementation CarouselPicturesView
+@synthesize count = _count;
 - (void)setMaxImageCount:(NSInteger)MaxImageCount {
     _MaxImageCount = MaxImageCount;
     
@@ -51,6 +48,21 @@
 //    [self setUpTimer];
     
     [self changeImageLeft:_MaxImageCount-1 center:0 right:1];
+}
+
+- (NSInteger)count
+{
+    if (_count == 0) {
+        _count = 2;
+    }
+    return _count;
+}
+
+- (void)setCount:(NSInteger)count
+{
+    _count = count;
+    
+    [self setMaxImageCount:count];
 }
 
 - (void)imageViewDidTap {
@@ -74,6 +86,13 @@
     [self setMaxImageCount:_imageData.count];
     
     return self;
+}
+
+- (void)setFrame:(CGRect)frame
+{
+    [super setFrame:frame];
+    
+    [self prepareScrollView];
 }
 
 - (void)prepareScrollView {
@@ -107,6 +126,8 @@
     _leftImageView = left;
     _centerImageView = center;
     _rightImageView = right;
+    
+    [WebImageManager shareManager].DownloadImageRepeatCount = 2;
 }
 
 - (void)preparePageControl {
@@ -264,16 +285,15 @@
 
 - (void)changeImageLeft:(NSInteger)LeftIndex center:(NSInteger)centerIndex right:(NSInteger)rightIndex {
     if (_isNetwork) {
-        
-        _leftImageView.image = [self setImageWithIndex:LeftIndex];
-        _centerImageView.image = [self setImageWithIndex:centerIndex];
-        _rightImageView.image = [self setImageWithIndex:rightIndex];
+        _leftImageView.image = [self setInternetImageWithIndex:LeftIndex];
+        _centerImageView.image = [self setInternetImageWithIndex:centerIndex];
+        _rightImageView.image = [self setInternetImageWithIndex:rightIndex];
         
     }else {
         
-        _leftImageView.image = _imageData[LeftIndex];
-        _centerImageView.image = _imageData[centerIndex];
-        _rightImageView.image = _imageData[rightIndex];
+        _leftImageView.image = [self setLocalImageWithIndex:LeftIndex];
+        _centerImageView.image = [self setLocalImageWithIndex:centerIndex];
+        _rightImageView.image = [self setLocalImageWithIndex:rightIndex];
         
     }
     
@@ -293,13 +313,17 @@
     [self changeImageLeft:_MaxImageCount-1 center:0 right:1];
 }
 
-- (UIImage *)setImageWithIndex:(NSInteger)index {
+- (UIImage *)setInternetImageWithIndex:(NSInteger)index {
     //从内存缓存中取,如果没有使用占位图片
     UIImage *image = [[[WebImageManager shareManager] webImageCache] valueForKey:_imageData[index]];
     
-    return image ? image : _placeImage;
+    return image?image:_placeImage;
 }
-
+- (UIImage *)setLocalImageWithIndex:(NSInteger)index {
+    UIImage *image = _imageData[index];
+    
+    return image?image:_placeImage;
+}
 - (void)scorll {
     if (_scrollView) {
         [_scrollView setContentOffset:CGPointMake(_scrollView.contentOffset.x + myWidth, 0) animated:YES];
@@ -351,7 +375,14 @@
     for (NSString *urlSting in _imageData) {
         [[WebImageManager shareManager] downloadImageWithUrlString:urlSting];
     }
-    
+    [WebImageManager shareManager].downLoadImageSuccess = ^{ // 下载完了马上设置图片
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self changeImageLeft:_MaxImageCount-1 center:0 right:1];
+        });
+    };
+    if (_imageData.count) { // 防止第一次调用的时候有缓存不显示
+        [self changeImageLeft:_MaxImageCount-1 center:0 right:1];
+    }
 }
 
 -(void)dealloc {

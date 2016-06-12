@@ -27,6 +27,9 @@
 //内存缓存
 @property (nonatomic,strong) NSMutableDictionary *webImageCache;
 
+//成功回调
+@property (nonatomic, copy) void(^downLoadImageSuccess)();
+
 + (instancetype)shareManager;
 
 //下载到的图片都会被保存到webImageCache和沙盒中,key为urlString

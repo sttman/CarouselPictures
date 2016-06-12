@@ -17,7 +17,7 @@ typedef void(^imageViewDidTapAtIndex)(NSInteger index);
 
 @interface CarouselPicturesView : UIView
 
-///占位图片
+///占位图片，没有设置imageData再没设置这个显示空白
 @property (nonatomic,strong) UIImage *placeImage;
 
 @property (nonatomic,assign) NSTimeInterval AutoScrollDelay; ///default is 2.0f,如果小于0.5不自动播放
@@ -29,6 +29,12 @@ typedef void(^imageViewDidTapAtIndex)(NSInteger index);
 
 ///图片被点击会调用该block
 @property (nonatomic,copy) imageViewDidTapAtIndex imageViewDidTapAtIndex; ///index从0开始
+
+/// 设置几张图片 默认为2
+@property (nonatomic, assign) NSInteger count;
+
+/// 设置轮播图片，不设置显示默认图片
+@property (nonatomic,copy) NSArray *imageData;
 
 /*@parameter imageUrl
  imageUrlString或imageName
